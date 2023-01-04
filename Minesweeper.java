@@ -32,17 +32,18 @@ class Minesweeper {
 	private int[][] minesweeperMaker() {
 
 		mineNums = new HashSet<Integer>();
-		int[][] g = new int[cols][rows]; // 
-		 
-		enerates mine locations
-
-		 m = rand.nextInt(rows * cols);
-			(mineNums.contains(m)) { 
-				.nextInt(rows *
-			
-		eNu
+		int[][] g = new int[cols][rows]; 
+		
+		
+		// generates mine locations
+		for (int i = 0; i < numMines; i++) {
+			int m = rand.nextInt(rows * cols);
+			while (mineNums.contains(m)) { 
+				m = rand.nextInt(rows * cols);
+			}
+			mineNums.add(m);
 		}
-
+		
 		// places mines on board
 		for (int i : mineNums) {
 			g[i / rows][i % rows] = -1;

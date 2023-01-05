@@ -35,6 +35,7 @@ class Minesweeper {
 	int cols;
 	Random rand = new Random();
 	int[][] grid;
+	mineButton[][] buttons;
 
 	private JFrame mFrame;
 
@@ -45,12 +46,40 @@ class Minesweeper {
 		numMines = mines;
 		grid = minesweeperMaker(); // x, y
 
+		// JFrame setup
 		mFrame = new JFrame("AliceSweeper");
-		mFrame.setSize(400, 400);
+		//mFrame.setSize(400, 400);
 
 		mFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JPanel p = new JPanel(new GridLayout(rows, cols));
+		JPanel p = panelMaker();
+
+		//add p to frame
+		mFrame.add(p);
+
+		//pack frame
+		mFrame.pack();
+
+		//make visible
+		mFrame.setVisible(true);
+	}
+
+	private JPanel panelMaker() {
+
+		buttons = new mineButton[rows][cols];
+		
+		JPanel p = new JPanel();
+		p.setLayout(new GridLayout(rows, cols));
+
+		for (int x = 0; x < rows; x++) {
+			for (int y = 0; y < cols; y++) {
+				mineButton b = new mineButton(grid[x][y]);
+				buttons[x][y] = b;
+				p.add(b);
+			}
+		}
+
+		return (p);
 	}
 
 	private int[][] minesweeperMaker() {

@@ -6,6 +6,29 @@ import javax.swing.*;
 
 class Minesweeper {
 
+	class mineButton extends JButton {
+
+		int val;
+
+		public mineButton() {
+			super();
+		}
+
+		public mineButton(int value) {
+			super();
+			val = value;
+		}
+
+		public void setVal(int value) {
+			val = value;
+		}
+
+		public int getVal() {
+			return (val);
+		}
+
+	}
+
 	HashSet<Integer> mineNums;
 	int numMines;
 	int rows;
@@ -23,33 +46,33 @@ class Minesweeper {
 		grid = minesweeperMaker(); // x, y
 
 		mFrame = new JFrame("AliceSweeper");
-      	mFrame.setSize(400,400);
-      	mFrame.setLayout(new GridLayout(3, 1));
-      
-      	mFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+		mFrame.setSize(400, 400);
+
+		mFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		JPanel p = new JPanel(new GridLayout(rows, cols));
 	}
 
 	private int[][] minesweeperMaker() {
 
 		mineNums = new HashSet<Integer>();
-		int[][] g = new int[cols][rows]; 
-		
-		
+		int[][] g = new int[cols][rows];
+
 		// generates mine locations
 		for (int i = 0; i < numMines; i++) {
 			int m = rand.nextInt(rows * cols);
-			while (mineNums.contains(m)) { 
+			while (mineNums.contains(m)) {
 				m = rand.nextInt(rows * cols);
 			}
 			mineNums.add(m);
 		}
-		
+
 		// places mines on board
 		for (int i : mineNums) {
 			g[i / rows][i % rows] = -1;
 		}
 
-		printify(g); // prints just mines
+		// printify(g); // prints just mines
 
 		// counts number of adjacent mines per tile
 		for (int x = 0; x < cols; x++) {

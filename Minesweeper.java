@@ -12,11 +12,21 @@ class Minesweeper {
 
 		public mineButton() {
 			super();
+			val = 0;
+			format();
 		}
 
 		public mineButton(int value) {
 			super();
 			val = value;
+			format();
+		}
+
+		private void format() {
+			setText("" + val);
+			if (val == -1) {
+				setBackground(Color.RED);
+			}
 		}
 
 		public void setVal(int value) {
@@ -48,32 +58,33 @@ class Minesweeper {
 
 		// JFrame setup
 		mFrame = new JFrame("AliceSweeper");
-		//mFrame.setSize(400, 400);
+		// mFrame.setSize(400, 400);
 
 		mFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JPanel p = panelMaker();
 
-		//add p to frame
+		// add p to frame
 		mFrame.add(p);
 
-		//pack frame
+		// pack frame
 		mFrame.pack();
 
-		//make visible
+		// make visible
 		mFrame.setVisible(true);
 	}
 
 	private JPanel panelMaker() {
 
 		buttons = new mineButton[rows][cols];
-		
+
 		JPanel p = new JPanel();
 		p.setLayout(new GridLayout(rows, cols));
 
 		for (int x = 0; x < rows; x++) {
 			for (int y = 0; y < cols; y++) {
 				mineButton b = new mineButton(grid[x][y]);
+				b.setPreferredSize(new Dimension(50, 50));
 				buttons[x][y] = b;
 				p.add(b);
 			}

@@ -6,6 +6,7 @@ import javax.swing.*;
 
 class Minesweeper {
 
+	// mineButton nestled class
 	class mineButton extends JButton {
 
 		int val;
@@ -39,6 +40,7 @@ class Minesweeper {
 
 	}
 
+	// fields
 	HashSet<Integer> mineNums;
 	int numMines;
 	int rows;
@@ -74,6 +76,7 @@ class Minesweeper {
 		mFrame.setVisible(true);
 	}
 
+	// builds the panel with all buttons
 	private JPanel panelMaker() {
 
 		buttons = new mineButton[rows][cols];
@@ -93,6 +96,7 @@ class Minesweeper {
 		return (p);
 	}
 
+	// builds the array of mines
 	private int[][] minesweeperMaker() {
 
 		mineNums = new HashSet<Integer>();
@@ -200,6 +204,7 @@ class Minesweeper {
 		System.out.println();
 	}
 
+	// alternate print function
 	public void printify() {
 		for (int x = 0; x < cols; x++) {
 			System.out.print("|");

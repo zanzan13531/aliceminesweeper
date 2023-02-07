@@ -66,27 +66,39 @@ class Minesweeper {
 
 	class MineListener implements MouseListener {
 
+		Minesweeper m;
+
+		public MineListener(Minesweeper mine) {
+			m = mine;
+		}
+
 		public void mouseClicked(MouseEvent e) {
-			
+
 		}
 
 		public void mousePressed(MouseEvent e) {
 			mineButton b = (mineButton) e.getSource();
 			b.expose();
+			if (b.getVal() == -1) {
+				m.endGame();
+			}
+			if (b.getVal() == 0) {
+				// expose adjacents
+			}
 		}
 
 		public void mouseReleased(MouseEvent e) {
-			
+
 		}
 
 		public void mouseEntered(MouseEvent e) {
-			
+
 		}
 
 		public void mouseExited(MouseEvent e) {
-			
+
 		}
-		
+
 	}
 
 	// fields
@@ -137,7 +149,7 @@ class Minesweeper {
 			for (int y = 0; y < cols; y++) {
 				mineButton b = new mineButton(grid[x][y]);
 				b.setLoc(x, y);
-				b.addMouseListener(new MineListener());
+				b.addMouseListener(new MineListener(this));
 				b.setPreferredSize(new Dimension(50, 50));
 				buttons[x][y] = b;
 				p.add(b);
@@ -238,6 +250,15 @@ class Minesweeper {
 		}
 
 		return (m);
+	}
+
+	// ends the game if a mine is clicked
+	private void endGame() {
+		for (int x = 0; x < cols; x++) {
+			for (int y = 0; y < rows; y++) {
+				buttons[x][y].format();
+			}
+		}
 	}
 
 	// print function

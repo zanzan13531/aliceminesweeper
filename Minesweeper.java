@@ -64,6 +64,31 @@ class Minesweeper {
 
 	}
 
+	class MineListener implements MouseListener {
+
+		public void mouseClicked(MouseEvent e) {
+			
+		}
+
+		public void mousePressed(MouseEvent e) {
+			mineButton b = (mineButton) e.getSource();
+			b.expose();
+		}
+
+		public void mouseReleased(MouseEvent e) {
+			
+		}
+
+		public void mouseEntered(MouseEvent e) {
+			
+		}
+
+		public void mouseExited(MouseEvent e) {
+			
+		}
+		
+	}
+
 	// fields
 	HashSet<Integer> mineNums;
 	int numMines;
@@ -112,6 +137,7 @@ class Minesweeper {
 			for (int y = 0; y < cols; y++) {
 				mineButton b = new mineButton(grid[x][y]);
 				b.setLoc(x, y);
+				b.addMouseListener(new MineListener());
 				b.setPreferredSize(new Dimension(50, 50));
 				buttons[x][y] = b;
 				p.add(b);

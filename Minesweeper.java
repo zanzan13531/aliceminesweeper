@@ -111,6 +111,7 @@ class Minesweeper {
 		for (int x = 0; x < rows; x++) {
 			for (int y = 0; y < cols; y++) {
 				mineButton b = new mineButton(grid[x][y]);
+				b.setLoc(x, y);
 				b.setPreferredSize(new Dimension(50, 50));
 				buttons[x][y] = b;
 				p.add(b);

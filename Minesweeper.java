@@ -10,17 +10,23 @@ class Minesweeper {
 	class mineButton extends JButton {
 
 		int val;
+		int[] loc;
+		boolean exposed;
 
 		public mineButton() {
 			super();
 			val = 0;
-			format();
+			loc = new int[2];
+			exposed = false;
+			// format();
 		}
 
 		public mineButton(int value) {
 			super();
 			val = value;
-			format();
+			loc = new int[2];
+			exposed = false;
+			// format();
 		}
 
 		private void format() {
@@ -36,6 +42,24 @@ class Minesweeper {
 
 		public int getVal() {
 			return (val);
+		}
+
+		public void setLoc(int x, int y) {
+			loc[0] = x;
+			loc[1] = y;
+		}
+
+		public int[] getLoc() {
+			return loc;
+		}
+
+		public void expose() {
+			exposed = true;
+			format();
+		}
+
+		public boolean isExposed() {
+			return exposed;
 		}
 
 	}

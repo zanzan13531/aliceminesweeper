@@ -78,13 +78,14 @@ class Minesweeper {
 
 		public void mousePressed(MouseEvent e) {
 			mineButton b = (mineButton) e.getSource();
-			b.expose();
+			// b.expose();
 			if (b.getVal() == -1) {
 				m.endGame();
 			}
 			if (b.getVal() == 0) {
-				// expose adjacents
+				m.revealAdj(b.getLoc());
 			}
+			b.expose();
 		}
 
 		public void mouseReleased(MouseEvent e) {
@@ -257,6 +258,43 @@ class Minesweeper {
 		for (int x = 0; x < cols; x++) {
 			for (int y = 0; y < rows; y++) {
 				buttons[x][y].format();
+			}
+		}
+
+		JDialog d = new JDialog(mFrame, "Game Over");
+		d.setLayout(new BorderLayout());
+		JLabel l = new JLabel("Game Over");
+		d.add(l, BorderLayout.CENTER);
+		d.setSize(200, 100);
+		d.setVisible(true);
+
+	}
+
+	// reveals adjacent tiles of a 0
+	private void revealAdj(int[] loc) {
+		int x = loc[0];
+		int y = loc[1];
+
+		if (x < 0 || x >= cols) {
+			return;
+		}
+		if (y < 0 || y >= rows) {
+			return;
+		}
+
+		if (buttons[x][y].isExposed() == true) {
+			return;
+		}
+
+		buttons[x][y].expose();
+
+		if (buttons[x][y].getVal() != 0) {
+			return;
+		}
+
+		for (int i = -1; i <= 1; i++) {
+			for (int j = -1; j <= 1; j++) {
+				revealAdj(new int[] { x + i, y + j });
 			}
 		}
 	}
